@@ -1,0 +1,2 @@
+gmt psxy fitness_Tochigi.txt -Jx35T/0.4 -R2013-2-24T00:00:00/2013-3-27T00:00:00/0/250 -Ba1Dg1D> fitness_Tochigi.ps
+gmt psconvert fitness_Tochigi.ps -Tj -A
