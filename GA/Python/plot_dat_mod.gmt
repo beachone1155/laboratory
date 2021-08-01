@@ -1,0 +1,16 @@
+#!/bin/csh -f
+
+gmt set FONT_TITLE 18p
+gmt set MAP_TICK_LENGTH_PRIMARY -0.2c
+
+awk '{print $1, $2}'  tmp_org.dat >! xy_org.dat
+awk '{print $2, $3}'  tmp_mod.dat >! xy_mod.dat
+
+gmt psxy xy_org.dat -JX8 -R-50/50/-50/50 -Ba20f10 -BneSW+t"Original Data" -Sc0.1 -G0 -K -P >! plot_dat_mod.ps 
+gmt psxy xy_org.dat -J -R -O -K -P >> plot_dat_mod.ps
+
+gmt psxy xy_mod.dat -J -R -Ba20f10 -BneSW+t"Arranged Data" -Sc0.1 -G0 -O -K -P -Y10 >> plot_dat_mod.ps   
+gmt psxy xy_mod.dat -J -R -O -P >> plot_dat_mod.ps
+
+
+gmt psconvert -Tg -A -E300 -Qt -Qg -P plot_dat_mod.ps
