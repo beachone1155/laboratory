@@ -1,0 +1,12 @@
+#!/bin/csh -f
+
+gmt set FONT_TITLE 18p
+gmt set MAP_TICK_LENGTH_PRIMARY -0.2c
+
+# Make 50 points random data
+awk 'BEGIN{for(i=0;i<50;i++)print int(rand()*100)-50,int(rand()*100)-50}' >! xy.dat
+
+gmt psxy xy.dat -JX10 -R-50/50/-50/50 -Ba20f10 -BneSW+t"Original Data" -Sc0.1 -G0 -K -P >! plot_dat_org.ps 
+gmt psxy xy.dat -J -R -O -P >> plot_dat_org.ps
+
+gmt psconvert -Tg -A -E300 -Qt -Qg -P plot_dat_org.ps
